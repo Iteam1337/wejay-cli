@@ -1,9 +1,10 @@
 lib: [
   "_build/install/default/lib/wejay/META" {"META"}
+  "_build/install/default/lib/wejay/dune-package" {"dune-package"}
   "_build/install/default/lib/wejay/opam" {"opam"}
 ]
 bin: [
-  "_build/install/default/bin/wejay" {"wejay"}
+  "_build/install/default/bin/wejaycli" {"wejaycli"}
 ]
 doc: [
   "_build/install/default/doc/wejay/README.md"

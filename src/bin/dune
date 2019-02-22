@@ -1,5 +1,7 @@
-(executable 
+(executable
   (name Main)
-  (public_name wejay)
-  (libraries wejay cmdliner)
-)
+  (libraries wejay cmdliner))
+
+(install
+  (section bin)
+  (files (Main.exe as wejaycli)))
