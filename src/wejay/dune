@@ -1,4 +1,4 @@
 (library
   (name wejay)
-  (libraries logs curly)
+  (libraries logs curly str)
 )
