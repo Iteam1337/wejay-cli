@@ -4,14 +4,12 @@ module Args = {
   let command = {
     let doc = "Commands";
 
-    Arg.(value & pos(0, string, "blame") & info([], ~docv="COMMAND", ~doc));
+    Arg.(value & pos(0, string, "") & info([], ~docv="COMMAND", ~doc));
   };
-
   let args = {
-    let doc = "Arguments";
-    Arg.(
-      value & opt(string, "") & info(["a", "args"], ~docv="ARGUMENTS", ~doc)
-    );
+    let doc = "Args";
+
+    Arg.(value & pos(1, string, "") & info([], ~docv="ARGS", ~doc));
   };
 };
 
