@@ -8,11 +8,12 @@ let send_body = (command, args) => {
 };
 
 let make_request = ((command, args)) => {
+  print_string(send_body(command, args));
   switch (
     Curly.(
       run(
         Request.make(
-          ~url="http://localhost:3000/cli",
+          ~url="https://eed68a86.ngrok.io/cli",
           ~meth=`POST,
           ~body=send_body(command, args),
           ~headers=[("Content-Type", "application/json")],
