@@ -1,29 +1,12 @@
-/*
- open Bos.OS;
-
- let path = "/Users/ter/.wejay/.token" |> Fpath.v;
-
- let get_token = () => {
-   switch (File.read(path)) {
-   | Ok(t) => t
-   | Error(_) => ""
-   };
- };
-
- let write_token = token => {
-   File.write(path, token) |> ignore;
- };
- */
-
 open Bos.OS;
 
-let get_user_dir = () =>
+let get_wejay_dir = () =>
   switch (Dir.user()) {
-  | Ok(d) => Dir.to_string(d)
-  | Error(e) => Dir.to_string(e)
+  | Ok(d) => Fpath.to_string(d) ++ "/.wejay"
+  | _ => ""
   };
 
-let path = get_user_dir() ++ ".wejay/.token" |> Fpath.v;
+let path = get_wejay_dir() ++ "/.token" |> Fpath.v;
 
 let get_token = () => {
   switch (File.read(path)) {
@@ -33,5 +16,11 @@ let get_token = () => {
 };
 
 let write_token = token => {
+  print_string(get_wejay_dir());
+  switch (get_wejay_dir() |> Fpath.v |> Dir.exists) {
+  | Ok(_) => Dir.create(get_wejay_dir() |> Fpath.v) |> ignore
+  | Error(_) => ()
+  };
+
   File.write(path, token) |> ignore;
 };
