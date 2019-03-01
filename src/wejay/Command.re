@@ -28,6 +28,12 @@ let parse = cmd => {
   };
 };
 
+let is_login_request = command =>
+  switch (command |> parse) {
+  | Login => true
+  | _ => false
+  };
+
 let handle = (command, payload) => {
   switch (command, payload) {
   /* Just print the error-message from Wejay */
