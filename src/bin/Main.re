@@ -6,6 +6,7 @@ module Args = {
 
     Arg.(value & pos(0, string, "") & info([], ~docv="COMMAND", ~doc));
   };
+
   let args = {
     let doc = "Args";
 

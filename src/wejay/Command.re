@@ -7,6 +7,7 @@ type t =
   | Login
   | Help
   | Search
+  | Version
   | Volume
   | Queue
   | Unknown;
@@ -23,34 +24,30 @@ let parse = cmd => {
   | "gq"
   | "getqueue" => GetQueue
   | "queue" => Queue
+  | "version" => Version
   | "volume" => Volume
   | _cmd => Unknown
   };
 };
 
-let is_login_request = command =>
-  switch (command |> parse) {
-  | Login => true
-  | _ => false
-  };
-
-let handle = (command, payload) => {
-  switch (command, payload) {
-  /* Just print the error-message from Wejay */
+let handle_response = (command, payload) => {
+  switch (command |> parse, payload) {
+  /* Error-message from Wejay, just print it  */
   | (_, `Failed(e)) => "Failed: " ++ e |> print_string
 
-  /* Just print the response */
+  /* Standard response */
   | (Blame, `Ok(d))
   | (FullQueue, `Ok(d))
   | (Friday, `Ok(d))
   | (GetQueue, `Ok(d))
   | (Help, `Ok(d))
   | (NowPlaying, `Ok(d))
+  | (Version, `Ok(d))
   | (Volume, `Ok(d))
   | (Queue, `Ok(d))
   | (Unknown, `Ok(d)) => d |> print_string
 
-  /* These need to be handled separately */
+  /* Requires user-input */
   | (Login, `Ok(d)) => "Login: " ++ d |> print_string
   | (Search, `Ok(d)) => "Search: " ++ d |> print_string
   };

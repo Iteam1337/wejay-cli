@@ -8,7 +8,7 @@ let get_wejay_dir = () =>
 
 let path = get_wejay_dir() ++ "/.token" |> Fpath.v;
 
-let get_token = () => {
+let retrieve = () => {
   switch (File.read(path)) {
   | Ok(t) => t
   | Error(_) => ""
@@ -16,11 +16,15 @@ let get_token = () => {
 };
 
 let write_token = token => {
-  print_string(get_wejay_dir());
   switch (get_wejay_dir() |> Fpath.v |> Dir.exists) {
-  | Ok(_) => Dir.create(get_wejay_dir() |> Fpath.v) |> ignore
-  | Error(_) => ()
+  | Ok(exists) =>
+    exists ? () : Dir.create(get_wejay_dir() |> Fpath.v) |> ignore
+  | Error(`Msg(_msg)) =>
+    print_string("Error while trying to read directory")
   };
 
-  File.write(path, token) |> ignore;
+  switch (File.write(path, token)) {
+  | Ok(_) => print_string("Successfully wrote token to file.")
+  | Error(`Msg(_msg)) => print_string("Error while trying to add token")
+  };
 };

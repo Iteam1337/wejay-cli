@@ -8,18 +8,26 @@ let send_body = (command, args, user) => {
   |> replace_text(user, "{| user |}");
 };
 
+let check_version = () => {
+  switch (
+    Curly.(run(Request.make(~url=Config.repository_url, ~meth=`GET, ())))
+  ) {
+  | Ok(data) => `Ok(data.Curly.Response.body)
+  | Error(_) => `Failed("Error")
+  };
+};
+
 let make_request = ((command, args, token)) => {
-  print_string(send_body(command, args, token));
   switch (
     Curly.(
       run(
         Request.make(
-          ~url="https://eed68a86.ngrok.io/cli",
+          ~url=Config.server_url,
           ~meth=`POST,
           ~body=send_body(command, args, token),
           ~headers=[
             ("Content-Type", "application/json"),
-            ("token", "placeholder"),
+            ("access_token", token),
           ],
           (),
         ),

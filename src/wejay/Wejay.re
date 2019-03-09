@@ -1,11 +1,9 @@
 let run = (command, args) =>
-  /* Special cases */
-  if (command |> Command.is_login_request) {
-    Token.write_token(args);
-  } else {
-    let token = Token.get_token();
-
-    (command, args, token)
+  switch (command |> Command.parse) {
+  | Login => Token.write_token(args)
+  | Version => Api.check_version() |> ignore
+  | _ =>
+    (command, args, Token.retrieve())
     |> Api.make_request
-    |> Command.handle(command |> Command.parse);
+    |> Command.handle_response(command)
   };
