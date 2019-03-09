@@ -2,7 +2,7 @@
 
 install_wejay() {
   INSTALL_DIR="$HOME/.wejay"
-  mkdir INSTALL_DIR
+  mkdir -p $INSTALL_DIR &> /dev/null
 
   curl -o $HOME/.wejay/wejay https://raw.githubusercontent.com/Iteam1337/wejay-cli/master/_build/default/src/bin/Main.exe
 
