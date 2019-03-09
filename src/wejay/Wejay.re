@@ -1,6 +1,7 @@
 let run = (command, args) =>
   switch (command |> Command.parse) {
-  | Login => Token.write_token(args)
+  | Login => Api.login() |> ignore
+  | Token => Token.write_token(args)
   | Version => Api.check_version() |> ignore
   | _ =>
     (command, args, Token.retrieve())

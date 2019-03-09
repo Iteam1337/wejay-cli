@@ -2,11 +2,12 @@ type t =
   | Blame
   | GetQueue
   | FullQueue
+  | Login
   | Friday
   | NowPlaying
-  | Login
   | Help
   | Search
+  | Token
   | Version
   | Volume
   | Queue
@@ -15,15 +16,16 @@ type t =
 let parse = cmd => {
   switch (cmd) {
   | "blame" => Blame
-  | "login" => Login
-  | "search" => Search
-  | "help" => Help
+  | "friday" => Friday
   | "fq"
   | "fullqueue" => FullQueue
-  | "friday" => Friday
   | "gq"
   | "getqueue" => GetQueue
+  | "help" => Help
+  | "login" => Login
   | "queue" => Queue
+  | "search" => Search
+  | "token" => Token
   | "version" => Version
   | "volume" => Volume
   | _cmd => Unknown
@@ -37,17 +39,18 @@ let handle_response = (command, payload) => {
 
   /* Standard response */
   | (Blame, `Ok(d))
-  | (FullQueue, `Ok(d))
   | (Friday, `Ok(d))
+  | (FullQueue, `Ok(d))
   | (GetQueue, `Ok(d))
   | (Help, `Ok(d))
   | (NowPlaying, `Ok(d))
+  | (Queue, `Ok(d))
+  | (Token, `Ok(d))
   | (Version, `Ok(d))
   | (Volume, `Ok(d))
-  | (Queue, `Ok(d))
   | (Unknown, `Ok(d)) => d |> print_string
 
-  /* Requires user-input */
+  /* Special cases  */
   | (Login, `Ok(d)) => "Login: " ++ d |> print_string
   | (Search, `Ok(d)) => "Search: " ++ d |> print_string
   };

@@ -17,12 +17,16 @@ let check_version = () => {
   };
 };
 
+let login = () => {
+  Sys.command("open " ++ Config.auth_url);
+};
+
 let make_request = ((command, args, token)) => {
   switch (
     Curly.(
       run(
         Request.make(
-          ~url=Config.server_url,
+          ~url=Config.event_url,
           ~meth=`POST,
           ~body=send_body(command, args, token),
           ~headers=[
