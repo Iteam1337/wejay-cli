@@ -2,6 +2,14 @@
 
 ## Get started
 
+### Install
+
+```
+bash <(curl -s https://github.com/Iteam1337/wejay-cli/blob/master/install/install.sh)
+```
+
+### Develop
+
 **Build**
 
 `dune build`

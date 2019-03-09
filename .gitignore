@@ -1,4 +1,6 @@
-_build/install/**
+_build/*
+!_build/default/src/bin/Main.exe
+
 node_modules/**
 .merlin
 .DS_Store
