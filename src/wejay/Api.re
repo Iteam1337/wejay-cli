@@ -18,7 +18,12 @@ let check_version = () => {
 };
 
 let login = () => {
-  Sys.command("open " ++ Config.auth_url);
+  let res = Sys.command("open " ++ Config.auth_url);
+
+  switch (res) {
+  | 0 => `Ok("Paste the token you received: \n")
+  | _ => `Failed("Error while trying to open browser.")
+  };
 };
 
 let make_request = ((command, args, token)) => {

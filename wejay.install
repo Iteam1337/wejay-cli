@@ -4,7 +4,7 @@ lib: [
   "_build/install/default/lib/wejay/opam" {"opam"}
 ]
 bin: [
-  "_build/install/default/bin/wejaycli" {"wejay"}
+  "_build/install/default/bin/wejaycli" {"wejaycli"}
 ]
 doc: [
   "_build/install/default/doc/wejay/README.md"

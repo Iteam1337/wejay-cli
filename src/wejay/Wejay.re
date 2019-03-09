@@ -1,10 +1,10 @@
-let run = (command, args) =>
-  switch (command |> Command.parse) {
-  | Login => Api.login() |> ignore
-  | Token => Token.write_token(args)
-  | Version => Api.check_version() |> ignore
-  | _ =>
-    (command, args, Token.retrieve())
-    |> Api.make_request
-    |> Command.handle_response(command)
-  };
+let run = (command, args) => {
+  let response =
+    switch (command |> Command.parse) {
+    | Login => Api.login()
+    | Version => Api.check_version()
+    | _ => (command, args, Token.retrieve()) |> Api.make_request
+    };
+
+  response |> Command.handle_response(command);
+};

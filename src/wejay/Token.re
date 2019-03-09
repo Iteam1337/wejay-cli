@@ -24,7 +24,7 @@ let write_token = token => {
   };
 
   switch (File.write(path, token)) {
-  | Ok(_) => print_string("Successfully wrote token to file.")
-  | Error(`Msg(_msg)) => print_string("Error while trying to add token")
+  | Ok(_) => `Ok("Successfully wrote token to file.")
+  | Error(`Msg(_msg)) => `Failed("Error while trying to add token")
   };
 };

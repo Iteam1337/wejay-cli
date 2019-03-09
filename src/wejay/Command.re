@@ -7,7 +7,6 @@ type t =
   | NowPlaying
   | Help
   | Search
-  | Token
   | Version
   | Volume
   | Queue
@@ -25,7 +24,6 @@ let parse = cmd => {
   | "login" => Login
   | "queue" => Queue
   | "search" => Search
-  | "token" => Token
   | "version" => Version
   | "volume" => Volume
   | _cmd => Unknown
@@ -45,13 +43,19 @@ let handle_response = (command, payload) => {
   | (Help, `Ok(d))
   | (NowPlaying, `Ok(d))
   | (Queue, `Ok(d))
-  | (Token, `Ok(d))
   | (Version, `Ok(d))
   | (Volume, `Ok(d))
   | (Unknown, `Ok(d)) => d |> print_string
 
   /* Special cases  */
-  | (Login, `Ok(d)) => "Login: " ++ d |> print_string
+  | (Login, `Ok(d)) =>
+    print_string(d);
+    let res = read_line() |> Token.write_token;
+
+    switch (res) {
+    | `Ok(d)
+    | `Failed(d) => d |> print_string
+    };
   | (Search, `Ok(d)) => "Search: " ++ d |> print_string
   };
 };
