@@ -5,7 +5,7 @@
 ### Install
 
 ```
-bash <(curl -s https://github.com/Iteam1337/wejay-cli/blob/master/install/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/Iteam1337/wejay-cli/master/install/install.sh)
 ```
 
 ### Develop
