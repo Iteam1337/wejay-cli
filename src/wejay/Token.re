@@ -19,12 +19,11 @@ let write_token = token => {
   switch (get_wejay_dir() |> Fpath.v |> Dir.exists) {
   | Ok(exists) =>
     exists ? () : Dir.create(get_wejay_dir() |> Fpath.v) |> ignore
-  | Error(`Msg(_msg)) =>
-    print_string("Error while trying to read directory")
+  | Error(`Msg(msg)) => `Failed(`Could_not_read_directory(msg)) |> ignore
   };
 
   switch (File.write(path, token)) {
   | Ok(_) => `Ok("Successfully wrote token to file.")
-  | Error(`Msg(_msg)) => `Failed("Error while trying to add token")
+  | Error(`Msg(msg)) => `Failed(`Could_not_write_token(msg))
   };
 };

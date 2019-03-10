@@ -30,10 +30,10 @@ let parse = cmd => {
   };
 };
 
-let handle_response = (command, payload) => {
-  switch (command |> parse, payload) {
+let handle_response = (command, result) => {
+  switch (command |> parse, result) {
   /* Error-message from Wejay, just print it  */
-  | (_, `Failed(e)) => "Failed: " ++ e |> print_string
+  | (_, `Failed(e)) => e |> Errors.to_string
 
   /* Standard response */
   | (Blame, `Ok(d))
@@ -50,11 +50,12 @@ let handle_response = (command, payload) => {
   /* Special cases  */
   | (Login, `Ok(d)) =>
     print_string(d);
+
     let res = read_line() |> Token.write_token;
 
     switch (res) {
-    | `Ok(d)
-    | `Failed(d) => d |> print_string
+    | `Ok(d) => d |> print_string
+    | `Failed(e) => e |> Errors.to_string
     };
   | (Search, `Ok(d)) => "Search: " ++ d |> print_string
   };

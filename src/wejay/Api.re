@@ -12,8 +12,11 @@ let check_version = () => {
   switch (
     Curly.(run(Request.make(~url=Config.repository_url, ~meth=`GET, ())))
   ) {
-  | Ok(data) => `Ok(data.Curly.Response.body)
-  | Error(_) => `Failed("Error")
+  /*
+    | Ok(data) => `Ok(data.Curly.Response.body)
+   | Error(e) => `Failed(`Could_not_check_version(e))
+   */
+  | _ => `Failed(`Not_implemented("version"))
   };
 };
 
@@ -22,11 +25,11 @@ let login = () => {
 
   switch (res) {
   | 0 => `Ok("Paste the token you received: \n")
-  | _ => `Failed("Error while trying to open browser.")
+  | _ => `Failed(`Could_not_open_browser)
   };
 };
 
-let make_request = ((command, args, token)) => {
+let wejay = ((command, args, token)) => {
   switch (
     Curly.(
       run(
@@ -44,8 +47,6 @@ let make_request = ((command, args, token)) => {
     )
   ) {
   | Ok(data) => `Ok(data.Curly.Response.body)
-  | Error(e) =>
-    Format.printf("Failed: %a", Curly.Error.pp, e);
-    `Failed("Error");
+  | Error(e) => `Failed(`Wejay_request((Curly.Error.pp, e)))
   };
 };
