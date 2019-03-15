@@ -51,7 +51,7 @@ let handle_response = (command, result) => {
   | (Login, `Ok(d)) =>
     print_string(d);
 
-    let res = read_line() |> Token.write_token;
+    let res = read_line() |> Utils.write_token;
 
     switch (res) {
     | `Ok(d) => d |> print_string

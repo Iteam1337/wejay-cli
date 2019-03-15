@@ -1,20 +1,21 @@
-let send_body = (command, args, user) => {
+let send_body = (command, args) => {
   let replace_text = (replacer, text) =>
     Str.(replace_first(regexp(text), replacer));
 
-  "{ \"command\": \"{| command |}\", \"args\": \"{| args |}\",  \"user\": \"{| user |}\"}"
-  |> replace_text(command, "{| command |}")
-  |> replace_text(args, "{| args |}")
-  |> replace_text(user, "{| user |}");
+  "{ \"command\": \"COMMAND\", \"args\": \"ARGS\"}"
+  |> replace_text(command, "COMMAND")
+  |> replace_text(args, "ARGS");
 };
 
 let check_version = () => {
-  switch (
-    Curly.(run(Request.make(~url=Config.repository_url, ~meth=`GET, ())))
-  ) {
   /*
-    | Ok(data) => `Ok(data.Curly.Response.body)
-   | Error(e) => `Failed(`Could_not_check_version(e))
+   * TODO(@lessp): Implement this, an idea would be to compare MD5 with
+   *               file on disk and the binary on Github
+   */
+  switch (Curly.(run(Request.make(~url=Config.build_url, ~meth=`GET, ())))) {
+  /*
+   | Ok(data) => `Ok(data.Curly.Response.body)
+   | Error(e) => `Failed(`Could_not_check_version((Curly.Error.pp, e)))
    */
   | _ => `Failed(`Not_implemented("version"))
   };
@@ -36,7 +37,7 @@ let wejay = ((command, args, token)) => {
         Request.make(
           ~url=Config.event_url,
           ~meth=`POST,
-          ~body=send_body(command, args, token),
+          ~body=send_body(command, args),
           ~headers=[
             ("Content-Type", "application/json"),
             ("access_token", token),

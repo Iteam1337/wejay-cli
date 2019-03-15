@@ -1,8 +1,8 @@
 let to_string = e => {
   switch (e) {
   | `Could_not_open_browser => Format.printf("Could not open browsser")
-  | `Could_not_check_version(err) =>
-    Format.printf("Could not check version: %s", err)
+  | `Could_not_check_version(formatter, err) =>
+    Format.printf("Could not check version:\n\n%a", formatter, err)
   | `Wejay_request(formatter, err) =>
     Format.printf(
       "Error while trying to request Wejay API:\n\n%a",

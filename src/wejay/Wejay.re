@@ -6,7 +6,7 @@ let run = (command, args) => {
     | Version => Api.check_version()
 
     /* Let Wejay handle anything else */
-    | _ => (command, args, Token.retrieve()) |> Api.wejay
+    | _ => (command, args, Utils.read_token()) |> Api.wejay
     };
 
   response |> Command.handle_response(command);
