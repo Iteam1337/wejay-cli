@@ -2,7 +2,7 @@ let send_body = (command, args) => {
   let replace_text = (replacer, text) =>
     Str.(replace_first(regexp(text), replacer));
 
-  "{ \"command\": \"COMMAND\", \"args\": \"ARGS\"}"
+  "{ \"command\": \"COMMAND\", \"args\": \"ARGS\" }"
   |> replace_text(command, "COMMAND")
   |> replace_text(args, "ARGS");
 };

@@ -22,6 +22,7 @@ let parse = cmd => {
   | "getqueue" => GetQueue
   | "help" => Help
   | "login" => Login
+  | "q"
   | "queue" => Queue
   | "search" => Search
   | "version" => Version
