@@ -4,3 +4,11 @@ _build/*
 node_modules/**
 .merlin
 .DS_Store
+
+_build
+_esy/
+esy.lock/
+_release
+*.byte
+*.native
+*.install

@@ -1,0 +1,31 @@
+{
+  "name": "wejay-cli",
+  "version": "0.1.0",
+  "description": "CLI tool for Wejay",
+  "license": "MIT",
+  "esy": { "build": "refmterr dune build", "release": { "bin": [ "Main" ] } },
+  "scripts": {
+    "watch": "dune build --watch",
+    "test": "esy x Main",
+    "doc": "esy dune build @doc"
+  },
+  "dependencies": {
+    "@esy-ocaml/reason": ">= 3.4.0 < 3.5.0",
+    "@opam/bos": "0.2.0",
+    "@opam/chalk": "1.0",
+    "@opam/cmdliner": "1.0.3",
+    "@opam/curly": "0.1.0",
+    "@opam/dune": "*",
+    "@reason-native/console": "*",
+    "@reason-native/pastel": "*",
+    "@reason-native/rely": "*",
+    "ocaml": "~4.6.0",
+    "refmterr": "*"
+  },
+  "devDependencies": {
+    "@opam/merlin": "*",
+    "ocaml": "~4.6.0",
+    "@opam/odoc": "*"
+  },
+  "resolutions": { "@opam/cmdliner": "1.0.2" }
+}

@@ -1,11 +1,11 @@
 lib: [
-  "_build/install/default/lib/wejay/META" {"META"}
-  "_build/install/default/lib/wejay/dune-package" {"dune-package"}
-  "_build/install/default/lib/wejay/opam" {"opam"}
+  "/Users/ter/dev/diverse/wejay-cli/_esy/default/store/b/wejay_cli-f53ee714/install/default/lib/wejay/META" {"META"}
+  "/Users/ter/dev/diverse/wejay-cli/_esy/default/store/b/wejay_cli-f53ee714/install/default/lib/wejay/dune-package" {"dune-package"}
+  "/Users/ter/dev/diverse/wejay-cli/_esy/default/store/b/wejay_cli-f53ee714/install/default/lib/wejay/opam" {"opam"}
 ]
 bin: [
-  "_build/install/default/bin/wejaycli" {"wejaycli"}
+  "/Users/ter/dev/diverse/wejay-cli/_esy/default/store/b/wejay_cli-f53ee714/install/default/bin/wejaycli" {"wejaycli"}
 ]
 doc: [
-  "_build/install/default/doc/wejay/README.md"
+  "/Users/ter/dev/diverse/wejay-cli/_esy/default/store/b/wejay_cli-f53ee714/install/default/doc/wejay/README.md"
 ]

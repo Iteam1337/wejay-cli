@@ -1,4 +1,4 @@
 (library
   (name wejay)
-  (libraries bos curly str)
+  (libraries bos curly pastel.lib console.lib str)
 )

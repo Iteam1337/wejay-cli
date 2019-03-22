@@ -46,7 +46,7 @@ let handle_response = (command, result) => {
   | (Queue, `Ok(d))
   | (Version, `Ok(d))
   | (Volume, `Ok(d))
-  | (Unknown, `Ok(d)) => d |> print_string
+  | (Unknown, `Ok(d)) => d |> Parse.run |> print_endline
 
   /* Special cases  */
   | (Login, `Ok(d)) =>
