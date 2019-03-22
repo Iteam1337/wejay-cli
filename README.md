@@ -8,6 +8,9 @@
 bash <(curl -s https://raw.githubusercontent.com/Iteam1337/wejay-cli/master/install/install.sh)
 ```
 
+To log in via Slack, run the command: `wejay login` and follow the instructions.
+
+
 ### Develop
 
 **Build**
